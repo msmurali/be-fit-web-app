@@ -9,7 +9,7 @@ const HeroSection = () => {
           Find the perfect workout for your lifestyle. Explore a variety of
           workouts tailored to your needs.
         </p>
-        <button className="mt-8 lg:mt-10 px-8 md:px-16 py-3 lg:text-2xl bg-secondary active:bg-secondary-dark transition-colors ease-in-out duration-150 rounded-lg font-medium shadow-md">
+        <button className="mt-8 lg:mt-10 px-8 md:px-16 py-3 text-xl lg:text-2xl bg-secondary active:bg-secondary-dark transition-colors ease-in-out duration-150 rounded-lg  shadow-md">
           Explore
         </button>
       </div>
