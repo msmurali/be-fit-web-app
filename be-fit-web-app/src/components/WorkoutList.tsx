@@ -7,7 +7,15 @@ const WorkoutList = () => {
             <h1 className='text-2xl font-bold text-white w-3/5'>Every exercise with detailed steps</h1>
             <button className='text-secondary p-2 border-2 border-secondary rounded-lg'>See More</button>
         </div>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
         <WorkoutCard></WorkoutCard>
+        <WorkoutCard></WorkoutCard>
+        <WorkoutCard></WorkoutCard>
+        <WorkoutCard></WorkoutCard>
+        <WorkoutCard></WorkoutCard>
+        <WorkoutCard></WorkoutCard>
+        <WorkoutCard></WorkoutCard>
+        </div>
     </div>
 }
 

@@ -1,6 +1,6 @@
 import equipementSectionImg from "../assets/images/equipements-section-img.png";
 import checkImg from "../assets/icons/check.svg";
-import points from "../assets/text-content/equipements-section-points.json";
+import points from "../assets/json/equipements-section-points.json";
 
 const EquipementSection = () => {
   return (
