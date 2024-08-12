@@ -12,7 +12,12 @@ module.exports = {
         "secondary-dark": "#002E6F",
       },
       backgroundImage: {
-        'hero-section': "linear-gradient(to right, rgba(0, 0, 0, 0.5), transparent), url('/src/assets/images/hero-section-img.png')"
+        "hero-section":
+          "linear-gradient(to right, rgba(0, 0, 0, 0.5), transparent), url('/src/assets/images/hero-section-img.png')",
+      },
+      backgroundSize: {
+        "100%": "100%",
+        "150%": "150%",
       },
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
