@@ -5,19 +5,19 @@ import targetMusclesList from "../mock/json/target-list.json";
 import { Exercise } from "../models/Excercise.modal";
 
 export class ExercisesDBMockApi {
-  public fetchAllExcercises(): Exercise[] {
-    return exercisesList;
+  public async fetchAllExcercises(): Promise<Exercise[]> {
+    return Promise.resolve(exercisesList);
   }
 
-  public fetchAllEquipement(): string[] {
-    return equipementList;
+  public async fetchAllEquipement(): Promise<string[]> {
+    return Promise.resolve(equipementList);
   }
 
-  public fetchAllBodyParts(): string[] {
-    return bodyPartList;
+  public async fetchAllBodyParts(): Promise<string[]> {
+    return Promise.resolve(bodyPartList);
   }
 
-  public fetchAllTargetMuscles(): string[] {
-    return targetMusclesList;
+  public async fetchAllTargetMuscles(): Promise<string[]> {
+    return Promise.resolve(targetMusclesList);
   }
 }

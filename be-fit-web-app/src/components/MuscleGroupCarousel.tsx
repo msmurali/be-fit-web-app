@@ -3,36 +3,7 @@ import React from "react";
 const MuscleGroupCarousel: React.FC = () => {
   const carousel = React.useRef<HTMLDivElement>(null);
 
-  React.useEffect(() => {
-    let mouseDown: boolean = false;
-    let startX: number, scrollLeft: number;
-    const scrollableElement = carousel?.current;
-
-    const startDragging = ($event: MouseEvent) => {
-      mouseDown = true;
-      startX = $event.pageX - (scrollableElement?.offsetLeft || 0);
-      scrollLeft = scrollableElement?.scrollLeft || 0;
-    };
-
-    const stopDragging = ($event: Event) => {
-      mouseDown = false;
-    };
-
-    const move = ($event: MouseEvent) => {
-      $event.preventDefault();
-      if (!mouseDown || !scrollableElement) {
-        return;
-      }
-      const x = $event?.pageX - (scrollableElement?.offsetLeft || 0);
-      const scroll = x - startX;
-      scrollableElement.scrollLeft = scrollLeft - scroll;
-    };
-
-    scrollableElement?.addEventListener("mousemove", move, false);
-    scrollableElement?.addEventListener("mousedown", startDragging, false);
-    scrollableElement?.addEventListener("mouseup", stopDragging, false);
-    scrollableElement?.addEventListener("mouseleave", stopDragging, false);
-  }, []);
+  React.useEffect(() => {}, []);
 
   return (
     <div className="bg-primary font-poppins pt-10">
@@ -73,7 +44,6 @@ interface MuscleGroupCarouselCardProps {
 const MuscleGroupCarouselCard = ({
   targetMuscleGroup,
 }: MuscleGroupCarouselCardProps) => {
- 
   const imgSrc = require(`../assets/icons/${targetMuscleGroup}.svg`);
   const cardRef = React.useRef<HTMLDivElement>(null);
   const [active, setActive] = React.useState(false);
