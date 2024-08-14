@@ -1,7 +1,14 @@
 import React from "react";
+import { AppStateContext } from "../contexts/app-state.context";
+import { v4 as uuidv4 } from "uuid";
+import {
+  MUSCLE_GROUP_CAROUSEL_CARD_TEXT_MAX_LEN,
+  SPACE,
+} from "../constants/consts";
 
 const MuscleGroupCarousel: React.FC = () => {
   const carousel = React.useRef<HTMLDivElement>(null);
+  const { targetMuscles } = React.useContext(AppStateContext) || {};
 
   React.useEffect(() => {}, []);
 
@@ -24,13 +31,13 @@ const MuscleGroupCarousel: React.FC = () => {
       </div>
       <div className="wrapper w-full max-w-full overflow-auto scrollbar-hide px-8 pb-20">
         <div className="muscle-group-carousel flex flex-row" ref={carousel}>
-          <MuscleGroupCarouselCard targetMuscleGroup="biceps"></MuscleGroupCarouselCard>
-          <MuscleGroupCarouselCard targetMuscleGroup="biceps"></MuscleGroupCarouselCard>
-          <MuscleGroupCarouselCard targetMuscleGroup="biceps"></MuscleGroupCarouselCard>
-          <MuscleGroupCarouselCard targetMuscleGroup="biceps"></MuscleGroupCarouselCard>
-          <MuscleGroupCarouselCard targetMuscleGroup="biceps"></MuscleGroupCarouselCard>
-          <MuscleGroupCarouselCard targetMuscleGroup="biceps"></MuscleGroupCarouselCard>
-          <MuscleGroupCarouselCard targetMuscleGroup="biceps"></MuscleGroupCarouselCard>
+          {targetMuscles &&
+            targetMuscles?.map((targetMuscle) => (
+              <MuscleGroupCarouselCard
+                key={uuidv4()}
+                targetMuscleGroup={targetMuscle}
+              ></MuscleGroupCarouselCard>
+            ))}
         </div>
       </div>
     </div>
@@ -65,6 +72,14 @@ const MuscleGroupCarouselCard = ({
     }
   }, []);
 
+  const getTargetMuscleGroup = (targetMuscle: string) => {
+    if (targetMuscle?.length < MUSCLE_GROUP_CAROUSEL_CARD_TEXT_MAX_LEN) {
+      return targetMuscle;
+    }
+    const [firstWord] = targetMuscle?.split(SPACE);
+    return firstWord;
+  };
+
   return (
     <div
       ref={cardRef}
@@ -76,7 +91,9 @@ const MuscleGroupCarouselCard = ({
       <div className="muscle-group-carousel-card_content flex items-end justify-between mt-4">
         <div>
           <span className="text-xs leading-none">workouts for</span>
-          <h2 className="text-3xl font-bold">{targetMuscleGroup}</h2>
+          <h2 className="text-2xl font-bold">
+            {getTargetMuscleGroup(targetMuscleGroup)}
+          </h2>
         </div>
         <div>
           <button>

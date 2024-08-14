@@ -1,6 +1,7 @@
 import equipementSectionImg from "../assets/images/equipements-section-img.png";
 import checkImg from "../assets/icons/check.svg";
 import points from "../assets/json/equipements-section-points.json";
+import { v4 as uuid } from "uuid";
 
 const EquipementSection = () => {
   return (
@@ -15,7 +16,10 @@ const EquipementSection = () => {
           </h1>
           {points.map((point) => {
             return (
-              <div className="flex flex-row justify-start items-start pt-8">
+              <div
+                className="flex flex-row justify-start items-start pt-8"
+                key={uuid()}
+              >
                 <img src={checkImg} alt="check" />
                 <span className="pl-3 text-lg">{point?.text}</span>
               </div>

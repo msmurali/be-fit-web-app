@@ -1,4 +1,4 @@
-import { Exercise } from "./Excercise.modal";
+import { Exercise } from "./excercise.modal";
 
 export interface AppState {
     exercises?: Exercise[];

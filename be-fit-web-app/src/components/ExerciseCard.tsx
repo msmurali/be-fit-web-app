@@ -1,18 +1,27 @@
 import React from "react";
 import title from "../assets/icons/title.svg";
 import equipement from "../assets/icons/equipement.svg";
+import { Exercise } from "../models/excercise.modal";
+import { EMPTY_STRING } from "../constants/consts";
 
-const WorkoutCard = () => {
+interface ExerciseCardProps {
+  exercise: Exercise;
+}
+
+const ExerciseCard = ({ exercise }: ExerciseCardProps) => {
   return (
-    <div className="workout-card h-96 rounded-2xl flex flex-row justify-start items-end relative overflow-hidden bg-white">
+    <div className="exercise-card h-96 rounded-2xl flex flex-row justify-start items-end relative overflow-hidden bg-white">
       <img
         className="w-full min-h-full rounded-2xl hover:scale-110 transition-transform origin-center"
-        src="https://v2.exercisedb.io/image/NE1dPLWzEIlqhl"
-        alt="workout"
+        src={exercise?.gifUrl}
+        alt="exercise"
       />
       <div className="absolute bottom-0 flex flex-col justify-start items-start flex-wrap pb-2 pl-2">
-        <Tag tagName={"weighted seated bicep curl  (on stability ball)"} tagIcon={title}></Tag>
-        <Tag tagName={"Body weight"} tagIcon={equipement}></Tag>
+        <Tag tagName={exercise?.name || EMPTY_STRING} tagIcon={title}></Tag>
+        <Tag
+          tagName={exercise?.equipment || EMPTY_STRING}
+          tagIcon={equipement}
+        ></Tag>
       </div>
     </div>
   );
@@ -32,4 +41,4 @@ const Tag = ({ tagIcon, tagName }: TagProps) => {
   );
 };
 
-export default WorkoutCard;
+export default ExerciseCard;
