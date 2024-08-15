@@ -1,7 +1,7 @@
 import React from "react";
 import title from "../assets/icons/title.svg";
 import equipement from "../assets/icons/equipement.svg";
-import { Exercise } from "../models/excercise.modal";
+import { Exercise } from "../models/excercise.model";
 import { EMPTY_STRING } from "../constants/consts";
 
 interface ExerciseCardProps {

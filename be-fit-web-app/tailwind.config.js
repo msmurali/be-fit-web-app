@@ -22,6 +22,9 @@ module.exports = {
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
       },
+      gridTemplateColumns: {
+        "auto-1fr-auto": "auto 1fr auto",
+      },
     },
   },
   plugins: [],

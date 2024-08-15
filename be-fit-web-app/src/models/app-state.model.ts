@@ -1,10 +1,10 @@
-import { Exercise } from "./excercise.modal";
+import { Exercise } from "./excercise.model";
 
 export interface AppState {
     exercises?: Exercise[];
     targetMuscles?: string[];
     bodyParts?: string[];
-    name?: string;
+    equipements?: string[];
     loading?: boolean;
     error?: Error | null;
 }

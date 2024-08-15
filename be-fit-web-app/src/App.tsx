@@ -4,16 +4,13 @@ import MuscleGroupCarousel from "./components/MuscleGroupCarousel";
 import EquipementSection from "./components/EquipementSection";
 import WorkoutList from "./components/ExerciseList";
 import AppStateProvider from "./providers/app-state.provider";
+import SearchExercises from "./components/SearchExercises";
 
 const App = () => {
   return (
     <div className="app">
-      <Header></Header>
-      <HeroSection></HeroSection>
       <AppStateProvider>
-        <MuscleGroupCarousel></MuscleGroupCarousel>
-        <EquipementSection />
-        <WorkoutList></WorkoutList>
+        <SearchExercises></SearchExercises>
       </AppStateProvider>
     </div>
   );

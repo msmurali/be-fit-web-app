@@ -2,7 +2,7 @@ import exercisesList from "../mock/json/exercises.json";
 import bodyPartList from "../mock/json/body-part-list.json";
 import equipementList from "../mock/json/equipement-list.json";
 import targetMusclesList from "../mock/json/target-list.json";
-import { Exercise } from "../models/excercise.modal";
+import { Exercise } from "../models/excercise.model";
 
 export class ExercisesDBMockApi {
   public async fetchAllExcercises(): Promise<Exercise[]> {

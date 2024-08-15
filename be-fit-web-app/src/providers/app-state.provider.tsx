@@ -1,7 +1,6 @@
 import React, { ReactNode } from "react";
 import { AppStateContext } from "../contexts/app-state.context";
 import { AppState } from "../models/app-state.model";
-import { EMPTY_STRING } from "../constants/consts";
 import { ExercisesDBMockApi } from "../services/exercises-db.api.mock";
 
 interface AppStateProviderProps {
@@ -11,8 +10,8 @@ interface AppStateProviderProps {
 const INITIAL_APP_STATE = {
   bodyParts: [],
   exercises: [],
-  name: EMPTY_STRING,
   targetMuscles: [],
+  equipements: [],
   error: null,
   loading: false,
 } as AppState;
@@ -20,8 +19,8 @@ const INITIAL_APP_STATE = {
 const LOADING_APP_STATE = {
   bodyParts: [],
   exercises: [],
-  name: EMPTY_STRING,
   targetMuscles: [],
+  equipements: [],
   error: null,
   loading: true,
 };
