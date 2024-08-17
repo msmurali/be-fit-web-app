@@ -7,12 +7,26 @@ import {
 } from "../constants/consts";
 import RightArrowIcon from "./RightArrowIcon";
 import LeftArrowIcon from "./LeftArrowIcon";
+import { useNavigate } from "react-router-dom";
 
 const MuscleGroupCarousel: React.FC = () => {
   const carousel = React.useRef<HTMLDivElement>(null);
   const { targetMuscles } = React.useContext(AppStateContext) || {};
+  const scrollableContainerRef = React.useRef<HTMLDivElement>(null);
 
-  React.useEffect(() => {}, []);
+  const leftArrowClickHandler = () => {
+    const scrollableContainer = scrollableContainerRef.current;
+    if (scrollableContainer) {
+      scrollableContainer.scrollLeft -= 250;
+    }
+  };
+
+  const rightArrowClickHandler = () => {
+    const scrollableContainer = scrollableContainerRef.current;
+    if (scrollableContainer) {
+      scrollableContainer.scrollLeft += 250;
+    }
+  };
 
   return (
     <div className="bg-primary font-poppins pt-10">
@@ -26,18 +40,21 @@ const MuscleGroupCarousel: React.FC = () => {
           <button>
             <LeftArrowIcon
               active={false}
-              clickHandler={() => {}}
+              clickHandler={leftArrowClickHandler}
             ></LeftArrowIcon>
           </button>
           <button className="ml-3">
             <RightArrowIcon
               active={false}
-              clickHandler={() => {}}
+              clickHandler={rightArrowClickHandler}
             ></RightArrowIcon>
           </button>
         </div>
       </div>
-      <div className="wrapper w-full max-w-full overflow-auto scrollbar-hide px-8 pb-20">
+      <div
+        className="wrapper w-full max-w-full overflow-auto scroll-smooth scrollbar-hide px-8 pb-20"
+        ref={scrollableContainerRef}
+      >
         <div className="muscle-group-carousel flex flex-row" ref={carousel}>
           {targetMuscles &&
             targetMuscles?.map((targetMuscle) => (
@@ -62,6 +79,7 @@ const MuscleGroupCarouselCard = ({
   const imgSrc = require(`../assets/icons/${targetMuscleGroup}.svg`);
   const cardRef = React.useRef<HTMLDivElement>(null);
   const [active, setActive] = React.useState(false);
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     const cardElement = cardRef?.current;
@@ -88,8 +106,13 @@ const MuscleGroupCarouselCard = ({
     return firstWord;
   };
 
+  const navigateToSearchPage = (targetMuscleGroup: string) => {
+    navigate("/explore", { state: { targetMuscle: targetMuscleGroup } });
+  };
+
   return (
     <div
+      onClick={() => navigateToSearchPage(targetMuscleGroup)}
       ref={cardRef}
       className="p-6 mr-8 muscle-group-carousel-card bg-primary-light-bg hover:bg-gradient-to-tr hover:from-secondary-dark hover:to-secondary text-white min-w-72 rounded-lg shadow-black shadow-md font-poppins cursor-pointer"
     >
@@ -104,7 +127,7 @@ const MuscleGroupCarouselCard = ({
           </h2>
         </div>
         <div>
-          <button>
+          <button onClick={() => navigateToSearchPage(targetMuscleGroup)}>
             <RightArrowIcon active={active} clickHandler={() => {}} />
           </button>
         </div>

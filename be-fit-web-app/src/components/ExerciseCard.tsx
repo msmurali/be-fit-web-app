@@ -3,14 +3,24 @@ import title from "../assets/icons/title.svg";
 import equipement from "../assets/icons/equipement.svg";
 import { Exercise } from "../models/excercise.model";
 import { EMPTY_STRING } from "../constants/consts";
+import { useNavigate } from "react-router-dom";
 
 interface ExerciseCardProps {
   exercise: Exercise;
 }
 
 const ExerciseCard = ({ exercise }: ExerciseCardProps) => {
+  const navigate = useNavigate();
+
+  const navigateToDetailsPage = () => {
+    navigate(`/${exercise?.id}`);
+  };
+
   return (
-    <div className="exercise-card h-96 rounded-2xl flex flex-row justify-start items-end relative overflow-hidden bg-white">
+    <div
+      onClick={navigateToDetailsPage}
+      className="exercise-card h-96 rounded-2xl flex flex-row justify-start items-end relative overflow-hidden bg-white cursor-pointer"
+    >
       <img
         className="w-full min-h-full rounded-2xl hover:scale-110 transition-transform origin-center"
         src={exercise?.gifUrl}

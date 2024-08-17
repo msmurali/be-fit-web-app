@@ -20,4 +20,12 @@ export class ExercisesDBMockApi {
   public async fetchAllTargetMuscles(): Promise<string[]> {
     return Promise.resolve(targetMusclesList);
   }
+
+  public async fetchExerciseById(id: string): Promise<Exercise | null> {
+    const exercise = exercisesList?.find((exercise) => exercise?.id === id);
+    if (exercise) {
+      return Promise.resolve(exercise);
+    }
+    return Promise.resolve(null);
+  }
 }

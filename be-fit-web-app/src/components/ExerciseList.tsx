@@ -7,6 +7,7 @@ import { v4 as uuid } from "uuid";
 import "react-responsive-pagination/themes/classic.css";
 import "../shared/styles/pagination-styles.css";
 import { Exercise } from "../models/excercise.model";
+import { useNavigate } from "react-router-dom";
 
 interface ExerciseListProps {
   exercises?: Exercise[];
@@ -18,6 +19,7 @@ const ExerciseList = ({ exercises }: ExerciseListProps) => {
     () => exercises || appState?.exercises || [],
     [appState?.exercises, exercises]
   );
+  const navigate = useNavigate();
 
   const [currentPage, setCurrentPage] = React.useState(1);
   const [totalPages, setTotalPages] = React.useState(0);
@@ -27,6 +29,10 @@ const ExerciseList = ({ exercises }: ExerciseListProps) => {
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
+  };
+
+  const navigateToSearchPage = () => {
+    return navigate("/explore");
   };
 
   React.useEffect(() => {
@@ -40,7 +46,10 @@ const ExerciseList = ({ exercises }: ExerciseListProps) => {
           <h1 className="text-2xl font-bold text-white w-3/5">
             Every exercise with detailed steps
           </h1>
-          <button className="text-secondary p-2 border-2 border-secondary rounded-lg">
+          <button
+            onClick={navigateToSearchPage}
+            className="text-secondary p-2 border-2 border-secondary rounded-lg"
+          >
             See More
           </button>
         </div>
@@ -53,9 +62,9 @@ const ExerciseList = ({ exercises }: ExerciseListProps) => {
               <ExerciseCard key={uuid()} exercise={exercise}></ExerciseCard>
             ))}
       </div>
-      <div className="mt-14">
+      <div className="mt-14 flex justify-center items-center">
         <ResponsivePaginationComponent
-          className="pagination justify-center"
+          className="pagination"
           current={currentPage}
           total={totalPages}
           onPageChange={handlePageChange}

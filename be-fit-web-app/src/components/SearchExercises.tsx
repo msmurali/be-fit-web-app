@@ -4,12 +4,17 @@ import { ExerciseFilter } from "../models/exercise-filter.model";
 import { EMPTY_STRING } from "../constants/consts";
 import ExerciseList from "./ExerciseList";
 import SearchTags from "./SearchTags";
+import { useLocation } from "react-router-dom";
 
 const SearchExercises = () => {
   const { exercises, targetMuscles, bodyParts, equipements } =
     React.useContext(AppStateContext) || {};
   const [showFilter, setShowFilter] = React.useState<boolean>(true);
-  const [filter, setFilter] = React.useState<ExerciseFilter>({});
+  const location = useLocation();
+  const filterFromRoute = location.state as ExerciseFilter;
+  const [filter, setFilter] = React.useState<ExerciseFilter>(
+    filterFromRoute || {}
+  );
 
   const filteredExercises = exercises?.filter(
     ({ bodyPart, equipment, name, target }) => {
