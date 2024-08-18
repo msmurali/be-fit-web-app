@@ -8,6 +8,7 @@ import {
   X_RAPID_API_HOST,
   X_RAPID_API_KEY,
 } from "../constants/consts";
+import { ExerciseVideo } from "../models/exercise-video.model";
 import { mapVideoJsonObjToExerciseVideo } from "../utils/mappers";
 
 export class ExercisesVideosApi {
@@ -24,7 +25,7 @@ export class ExercisesVideosApi {
     },
   };
 
-  public searchExercisesVideos(query?: string) {
+  public searchExercisesVideos(query?: string): Promise<ExerciseVideo[]> {
     const url = `${this.BASE_URL}/${this.SEARCH_PATH}
     ?${this.PARAMS.query}=${query}
     &${this.PARAMS.language}=${ENGLISH_LAN}
@@ -32,8 +33,17 @@ export class ExercisesVideosApi {
     &${this.PARAMS.duration}=${SHORT_DURATION}
     &${this.PARAMS.sort}=${RELEVANCE_SORT}`;
 
-    return fetch(url, this.OPTIONS).then((response) =>
-      mapVideoJsonObjToExerciseVideo(response)
-    );
+    return fetch(url, this.OPTIONS)
+      .then((response) => response.json())
+      .then((json) => json as { [key: string]: any }[])
+      .then((jsonObj) => jsonObj.map(mapVideoJsonObjToExerciseVideo));
+  }
+
+  public openVideoInYoutube(id?: string) {
+    if (id) {
+      const url = `${apiConfig.baseUrl.youtubeStreamApiBaseUrl}
+      ?${apiConfig.queryParams.youtubeStreamApi.video}=${id}`;
+      window.open(url, "_blank");
+    }
   }
 }

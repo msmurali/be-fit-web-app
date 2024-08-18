@@ -1,6 +1,8 @@
 import React, { ReactNode } from "react";
 import { AppStateContext } from "../contexts/app-state.context";
 import { AppState } from "../models/app-state.model";
+import { apiConfig } from "../configs/api.config";
+import { ExercisesDBApi } from "../services/exercises-db.api";
 import { ExercisesDBMockApi } from "../services/exercises-db.api.mock";
 
 interface AppStateProviderProps {

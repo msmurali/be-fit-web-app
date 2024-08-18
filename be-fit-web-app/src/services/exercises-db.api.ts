@@ -6,6 +6,7 @@ import {
   X_RAPID_API_HOST,
   X_RAPID_API_KEY,
 } from "../constants/consts";
+import { Exercise } from "../models/excercise.model";
 
 export class ExercisesDBApi {
   BASE_URL = apiConfig.baseUrl.exercisesApiBaseUrl;
@@ -25,32 +26,42 @@ export class ExercisesDBApi {
     },
   };
 
-  public async fetchAllExcercises() {
+  public async fetchAllExcercises(): Promise<Exercise[]> {
     const url = `${this.BASE_URL}/${this.EXERCISE_LIST_PATH}
     ?${this.PARAMS.limit}=${LIMIT}
     &${this.PARAMS.offset}=${OFFSET}`;
-    return fetch(url, this.OPTIONS);
+    return fetch(url, this.OPTIONS).then(
+      (response) => response.json() as Promise<Exercise[]>
+    );
   }
 
-  public async fetchAllEquipement() {
+  public async fetchAllEquipement(): Promise<string[]> {
     const url = `${this.BASE_URL}/${this.EQUIPEMENTS_LIST_PATH}`;
-    return fetch(url, this.OPTIONS);
+    return fetch(url, this.OPTIONS).then(
+      (response) => response.json() as Promise<string[]>
+    );
   }
 
   public async fetchAllBodyParts() {
     const url = `${this.BASE_URL}/${this.BODY_PATH_LIST_PATH}`;
-    return fetch(url, this.OPTIONS);
+    return fetch(url, this.OPTIONS).then(
+      (response) => response.json() as Promise<string[]>
+    );
   }
 
   public async fetchAllTargetMuscles() {
     const url = `${this.BASE_URL}/${this.TARGET_MUSCLE_LIST_PATH}`;
-    return fetch(url, this.OPTIONS);
+    return fetch(url, this.OPTIONS).then(
+      (response) => response.json() as Promise<string[]>
+    );
   }
 
   public async fetchExerciseById(id: string) {
     const url = `${this.BASE_URL}/${this.EXERCISE_PATH}/${encodeURIComponent(
       id
     )}`;
-    return fetch(url, this.OPTIONS);
+    return fetch(url, this.OPTIONS).then(
+      (response) => response.json() as Promise<Exercise>
+    );
   }
 }

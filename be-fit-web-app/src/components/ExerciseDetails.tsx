@@ -2,12 +2,15 @@ import { useNavigate, useParams } from "react-router-dom";
 import backArrowIcon from "../assets/icons/back.svg";
 import playIcon from "../assets/icons/play.svg";
 import React from "react";
-import { ExercisesDBMockApi } from "../services/exercises-db.api.mock";
 import { Exercise } from "../models/excercise.model";
 import { v4 as uuid } from "uuid";
 import { AppStateContext } from "../contexts/app-state.context";
-import { ExercisesVideosMockApi } from "../services/exercise-videos.api.mock";
 import { ExerciseVideo } from "../models/exercise-video.model";
+import { apiConfig } from "../configs/api.config";
+import { ExercisesDBApi } from "../services/exercises-db.api";
+import { ExercisesVideosApi } from "../services/exercise-videos.api";
+import { ExercisesDBMockApi } from "../services/exercises-db.api.mock";
+import { ExercisesVideosMockApi } from "../services/exercise-videos.api.mock";
 
 type ExerciseDetailsPageParams = {
   id: string;
