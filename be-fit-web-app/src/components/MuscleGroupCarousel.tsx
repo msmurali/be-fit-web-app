@@ -30,42 +30,46 @@ const MuscleGroupCarousel: React.FC = () => {
 
   return (
     <div className="bg-primary font-poppins pt-10">
-      <div className="muscle-group-carousel_header w-full px-8 mb-10 flex flex-row  justify-between items-center">
-        <div className="muscle-group-carousel_title w-2/3">
-          <h3 className="text-2xl font-bold text-white">
-            Discover Workouts by Muscle Group
-          </h3>
-        </div>
-        <div className="muscle-group-carousel_btn-bar flex lg:flex flex-row">
-          <button>
-            <LeftArrowIcon
-              active={false}
-              clickHandler={leftArrowClickHandler}
-            ></LeftArrowIcon>
-          </button>
-          <button className="ml-3">
-            <RightArrowIcon
-              active={false}
-              clickHandler={rightArrowClickHandler}
-            ></RightArrowIcon>
-          </button>
-        </div>
-      </div>
-      <div
-        className="wrapper w-full max-w-full overflow-auto scroll-smooth scrollbar-hide px-8 pb-20"
-        ref={scrollableContainerRef}
-      >
-        <div className="muscle-group-carousel flex flex-row" ref={carousel}>
-          {targetMuscles &&
-            targetMuscles?.map((targetMuscle) => (
-              <MuscleGroupCarouselCard
-                key={uuidv4()}
-                targetMuscleGroup={targetMuscle}
-              ></MuscleGroupCarouselCard>
-            ))}
-            <div className="min-w-8"></div>
-        </div>
-      </div>
+      {targetMuscles && (
+        <>
+          <div className="muscle-group-carousel_header w-full px-8 mb-10 flex flex-row  justify-between items-center">
+            <div className="muscle-group-carousel_title w-2/3">
+              <h3 className="text-2xl font-bold text-white">
+                Discover Workouts by Muscle Group
+              </h3>
+            </div>
+            <div className="muscle-group-carousel_btn-bar flex lg:flex flex-row">
+              <button>
+                <LeftArrowIcon
+                  active={false}
+                  clickHandler={leftArrowClickHandler}
+                ></LeftArrowIcon>
+              </button>
+              <button className="ml-3">
+                <RightArrowIcon
+                  active={false}
+                  clickHandler={rightArrowClickHandler}
+                ></RightArrowIcon>
+              </button>
+            </div>
+          </div>
+          <div
+            className="wrapper w-full max-w-full overflow-auto scroll-smooth scrollbar-hide px-8 pb-20"
+            ref={scrollableContainerRef}
+          >
+            <div className="muscle-group-carousel flex flex-row" ref={carousel}>
+              {targetMuscles &&
+                targetMuscles?.map((targetMuscle) => (
+                  <MuscleGroupCarouselCard
+                    key={uuidv4()}
+                    targetMuscleGroup={targetMuscle}
+                  ></MuscleGroupCarouselCard>
+                ))}
+              <div className="min-w-8"></div>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };

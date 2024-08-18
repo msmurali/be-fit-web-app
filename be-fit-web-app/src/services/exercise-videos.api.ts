@@ -26,23 +26,19 @@ export class ExercisesVideosApi {
   };
 
   public searchExercisesVideos(query?: string): Promise<ExerciseVideo[]> {
-    const url = `${this.BASE_URL}/${this.SEARCH_PATH}
-    ?${this.PARAMS.query}=${query}
-    &${this.PARAMS.language}=${ENGLISH_LAN}
-    &${this.PARAMS.type}=${VIDEO_TYPE}
-    &${this.PARAMS.duration}=${SHORT_DURATION}
-    &${this.PARAMS.sort}=${RELEVANCE_SORT}`;
+    const url = `${this.BASE_URL}/${this.SEARCH_PATH}?${this.PARAMS.query}=${query}&${this.PARAMS.language}=${ENGLISH_LAN}&${this.PARAMS.type}=${VIDEO_TYPE}&${this.PARAMS.duration}=${SHORT_DURATION}&${this.PARAMS.sort}=${RELEVANCE_SORT}`;
 
     return fetch(url, this.OPTIONS)
       .then((response) => response.json())
-      .then((json) => json as { [key: string]: any }[])
+      .then((json) => {
+        return json.contents as { [key: string]: any; }[];
+      })
       .then((jsonObj) => jsonObj.map(mapVideoJsonObjToExerciseVideo));
   }
 
   public openVideoInYoutube(id?: string) {
     if (id) {
-      const url = `${apiConfig.baseUrl.youtubeStreamApiBaseUrl}
-      ?${apiConfig.queryParams.youtubeStreamApi.video}=${id}`;
+      const url = `${apiConfig.baseUrl.youtubeStreamApiBaseUrl}?${apiConfig.queryParams.youtubeStreamApi.video}=${id}`;
       window.open(url, "_blank");
     }
   }

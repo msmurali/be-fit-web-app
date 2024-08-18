@@ -6,11 +6,7 @@ import { Exercise } from "../models/excercise.model";
 import { v4 as uuid } from "uuid";
 import { AppStateContext } from "../contexts/app-state.context";
 import { ExerciseVideo } from "../models/exercise-video.model";
-import { apiConfig } from "../configs/api.config";
-import { ExercisesDBApi } from "../services/exercises-db.api";
-import { ExercisesVideosApi } from "../services/exercise-videos.api";
-import { ExercisesDBMockApi } from "../services/exercises-db.api.mock";
-import { ExercisesVideosMockApi } from "../services/exercise-videos.api.mock";
+import { getExercisesApi, getExercisesVideosApi } from "../configs/api.config";
 
 type ExerciseDetailsPageParams = {
   id: string;
@@ -43,10 +39,17 @@ const ExerciseDetails = () => {
   const [state, setState] = React.useState<ExerciseDetailsState>(INITIAL_STATE);
   const { exercises } = React.useContext(AppStateContext) || {};
   const navigate = useNavigate();
+  const exercisesVideosHalfLen = Math.floor(state?.exerciseVideos?.length / 2);
+  const exercisesVideosFirstHalf = [
+    ...state?.exerciseVideos?.slice(0, exercisesVideosHalfLen),
+  ];
+  const exercisesVideosSecondHalf = [
+    ...state?.exerciseVideos?.slice(exercisesVideosHalfLen),
+  ];
 
   React.useEffect(() => {
-    const exercisesDbApi = new ExercisesDBMockApi();
-    const exercisesVideoApi = new ExercisesVideosMockApi();
+    const exercisesDbApi = getExercisesApi();
+    const exercisesVideoApi = getExercisesVideosApi();
 
     if (id) {
       setState(LOADING_STATE);
@@ -57,9 +60,9 @@ const ExerciseDetails = () => {
           setState((state) => ({ ...state, exercise }));
           return exercisesVideoApi.searchExercisesVideos(exercise?.name);
         })
-        .then((exerciseVideos) =>
-          setState((state) => ({ ...state, exerciseVideos }))
-        )
+        .then((exerciseVideos) => {
+          setState((state) => ({ ...state, exerciseVideos }));
+        })
         .catch((error) => setState((state) => ({ ...state, error })))
         .finally(() => setState((state) => ({ ...state, loading: false })));
     }
@@ -108,7 +111,19 @@ const ExerciseDetails = () => {
             <div className="text-xl font-medium px-8 pb-4">Videos</div>
             <div className="w-full max-w-full overflow-x-auto scrollbar-hide pb-8">
               <div className="flex flex-row">
-                {state?.exerciseVideos?.map((video) => (
+                {exercisesVideosFirstHalf?.map((video) => (
+                  <ExerciseVideoCard
+                    key={uuid()}
+                    videoId={video?.id}
+                    thumbnailLink={video?.thumbnailLink}
+                  />
+                ))}
+                <span className="min-w-8"></span>
+              </div>
+            </div>
+            <div className="w-full max-w-full overflow-x-auto scrollbar-hide pb-8">
+              <div className="flex flex-row">
+                {exercisesVideosSecondHalf?.map((video) => (
                   <ExerciseVideoCard
                     key={uuid()}
                     videoId={video?.id}
@@ -201,8 +216,13 @@ const ExerciseVideoCard = ({
   videoId,
   thumbnailLink,
 }: ExerciseVideoCardProps) => {
+  const exercisesVideoApi = getExercisesVideosApi();
+
   return (
-    <div className="w-80 ml-8 min-w-96 relative rounded-2xl shadow-lg cursor-pointer">
+    <div
+      className="min-w-80 ml-8 relative rounded-2xl shadow-lg cursor-pointer"
+      onClick={() => exercisesVideoApi.openVideoInYoutube(videoId)}
+    >
       <button className="p-3 bg-white rounded-full absolute shadow-sm hover:shadow-2xl hover:scale-110 bottom-4 left-4">
         <img className="w-5 h-5" src={playIcon} alt="play" />
       </button>

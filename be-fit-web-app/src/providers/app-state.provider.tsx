@@ -1,9 +1,7 @@
 import React, { ReactNode } from "react";
 import { AppStateContext } from "../contexts/app-state.context";
 import { AppState } from "../models/app-state.model";
-import { apiConfig } from "../configs/api.config";
-import { ExercisesDBApi } from "../services/exercises-db.api";
-import { ExercisesDBMockApi } from "../services/exercises-db.api.mock";
+import { getExercisesApi } from "../configs/api.config";
 
 interface AppStateProviderProps {
   children: ReactNode;
@@ -31,7 +29,7 @@ const AppStateProvider: React.FC<AppStateProviderProps> = ({ children }) => {
   const [appState, setAppState] = React.useState(INITIAL_APP_STATE);
 
   React.useEffect(() => {
-    const exercisesDbApi = new ExercisesDBMockApi();
+    const exercisesDbApi = getExercisesApi();
 
     const initAppState = async () => {
       setAppState(LOADING_APP_STATE);

@@ -27,9 +27,7 @@ export class ExercisesDBApi {
   };
 
   public async fetchAllExcercises(): Promise<Exercise[]> {
-    const url = `${this.BASE_URL}/${this.EXERCISE_LIST_PATH}
-    ?${this.PARAMS.limit}=${LIMIT}
-    &${this.PARAMS.offset}=${OFFSET}`;
+    const url = `${this.BASE_URL}/${this.EXERCISE_LIST_PATH}?${this.PARAMS.limit}=${LIMIT}&${this.PARAMS.offset}=${OFFSET}`;
     return fetch(url, this.OPTIONS).then(
       (response) => response.json() as Promise<Exercise[]>
     );
