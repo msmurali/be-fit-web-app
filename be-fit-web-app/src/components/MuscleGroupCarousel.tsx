@@ -63,6 +63,7 @@ const MuscleGroupCarousel: React.FC = () => {
                 targetMuscleGroup={targetMuscle}
               ></MuscleGroupCarouselCard>
             ))}
+            <div className="min-w-8"></div>
         </div>
       </div>
     </div>

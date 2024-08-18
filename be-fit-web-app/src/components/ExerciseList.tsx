@@ -40,7 +40,7 @@ const ExerciseList = ({ exercises }: ExerciseListProps) => {
   }, [exercisesList]);
 
   return (
-    <div className="exercise-list px-8 py-14 bg-primary font-poppins">
+    <div className="exercise-list px-4 md:px-8 py-14 bg-primary font-poppins">
       {!exercises && (
         <div className="exercise-list_header flex flex-row justify-between items-center pb-14">
           <h1 className="text-2xl font-bold text-white w-3/5">

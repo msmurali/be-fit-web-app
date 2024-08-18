@@ -24,7 +24,7 @@ const SearchExercises = () => {
         targetMuscle: targetMuscleFilter,
         equipement: equipementFilter,
       } = filter;
-      const nameMatch = filterName ? name?.includes(filterName) : true;
+      const nameMatch = filterName ? name?.includes(filterName.toLowerCase()) : true;
       const bodyPartMatch = bodyPartFilter ? bodyPartFilter === bodyPart : true;
       const targetMuscleMatch = targetMuscleFilter
         ? targetMuscleFilter === target
@@ -88,9 +88,9 @@ const SearchExercises = () => {
   };
 
   return (
-    <div className="search-exercises font-poppins bg-primary p-8 lg:px-16 min-h-screen">
+    <div className="search-exercises font-poppins bg-primary lg:px-16 min-h-screen">
       <div
-        className={`search-exercises_header flex flex-row justify-between items-center ${
+        className={`search-exercises_header px-8 pt-8 flex flex-row justify-between items-center ${
           showFilter ? "mb-10" : "mb-0"
         }`}
       >
@@ -101,6 +101,7 @@ const SearchExercises = () => {
         </button>
       </div>
 
+      <div className="px-8">
       {showFilter && targetMuscles && (
         <SearchTags
           title="Target Muscles"
@@ -142,6 +143,7 @@ const SearchExercises = () => {
           />
         </div>
       )}
+      </div>
 
       <div className="exercises">
         <ExerciseList exercises={filteredExercises} />

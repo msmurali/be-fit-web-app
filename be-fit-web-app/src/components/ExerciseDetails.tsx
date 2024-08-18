@@ -107,6 +107,7 @@ const ExerciseDetails = () => {
               <div className="flex flex-row">
                 {state?.exerciseVideos?.map((video) => (
                   <ExerciseVideoCard
+                    key={uuid()}
                     videoId={video?.id}
                     thumbnailLink={video?.thumbnailLink}
                   />
@@ -142,7 +143,10 @@ const ExerciseDetails = () => {
             <div className="px-8 pb-8">
               {state?.exercise?.secondaryMuscles?.map((secondaryMuscle) => {
                 return (
-                  <div className="text-secondary px-2 py-1 border-2 border-secondary rounded-full inline-block mr-6">
+                  <div
+                    key={uuid()}
+                    className="text-secondary px-2 py-1 border-2 border-secondary rounded-full inline-block mr-3 mb-3"
+                  >
                     {secondaryMuscle}
                   </div>
                 );
@@ -164,6 +168,7 @@ const ExerciseDetails = () => {
                     )
                     ?.map((exercise) => (
                       <div
+                        key={uuid()}
                         className="min-w-72 min-h-72 max-w-72 max-h-72 mr-8 rounded-2xl shadow-xl shadow-primary-dark cursor-pointer"
                         onClick={() => navigateToDetailsPage(exercise?.id)}
                       >
@@ -174,6 +179,7 @@ const ExerciseDetails = () => {
                         />
                       </div>
                     ))}
+                <span className="min-w-8"></span>
               </div>
             </div>
           </div>
